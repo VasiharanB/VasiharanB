@@ -1,0 +1,32 @@
+<svg width="1200" height="320" viewBox="0 0 1200 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#050505"/>
+      <stop offset="0.55" stop-color="#11100D"/>
+      <stop offset="1" stop-color="#18140C"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="80" y1="40" x2="1040" y2="270" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8D47A"/>
+      <stop offset="0.5" stop-color="#D89B2B"/>
+      <stop offset="1" stop-color="#8D5B0B"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="320" rx="24" fill="url(#bg)"/>
+  <path d="M0 250C170 210 210 300 390 238C570 176 680 82 1200 118" stroke="url(#gold)" stroke-width="2" opacity="0.45"/>
+  <path d="M0 284C160 245 250 315 410 266C610 204 770 126 1200 150" stroke="#F0C45A" stroke-width="1" opacity="0.18"/>
+  <circle cx="1005" cy="70" r="110" stroke="#D9A441" stroke-width="1" opacity="0.12"/>
+  <circle cx="1005" cy="70" r="75" stroke="#D9A441" stroke-width="1" opacity="0.15"/>
+  <circle cx="1005" cy="70" r="8" fill="#F4CB69" filter="url(#glow)"/>
+  <circle cx="185" cy="75" r="3" fill="#F3CF72"/>
+  <circle cx="230" cy="104" r="2" fill="#B8862A"/>
+  <circle cx="1080" cy="212" r="2" fill="#E6B84A"/>
+  <text x="70" y="110" fill="#F6F1E3" font-family="Inter, Arial, sans-serif" font-size="23" letter-spacing="5">VASIHARAN B</text>
+  <text x="70" y="171" fill="url(#gold)" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="700">FULL-STACK DEVELOPER</text>
+  <text x="73" y="210" fill="#D9D3C5" font-family="Inter, Arial, sans-serif" font-size="19">Building practical software, intelligent systems, and immersive products.</text>
+  <rect x="70" y="246" width="205" height="2" rx="1" fill="url(#gold)"/>
+  <text x="70" y="278" fill="#918A7A" font-family="JetBrains Mono, Consolas, monospace" font-size="14">code • systems • AI • ship</text>
+</svg>
