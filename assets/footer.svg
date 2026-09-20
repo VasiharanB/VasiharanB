@@ -1,0 +1,15 @@
+<svg width="1200" height="180" viewBox="0 0 1200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="line" x1="120" y1="90" x2="1080" y2="90" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6B470B"/>
+      <stop offset="0.5" stop-color="#F0C35A"/>
+      <stop offset="1" stop-color="#6B470B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="180" rx="24" fill="#080808"/>
+  <path d="M120 72H1080" stroke="url(#line)" stroke-width="1"/>
+  <circle cx="110" cy="72" r="4" fill="#E7B84D"/>
+  <circle cx="1090" cy="72" r="4" fill="#E7B84D"/>
+  <text x="600" y="108" text-anchor="middle" fill="#E8E0CF" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="600">BUILD • LEARN • SHIP • REPEAT</text>
+  <text x="600" y="137" text-anchor="middle" fill="#8F8879" font-family="Inter, Arial, sans-serif" font-size="13">Thanks for visiting — every project is a step forward.</text>
+</svg>
