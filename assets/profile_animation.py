@@ -2,16 +2,16 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import math
 import os
 
-WIDTH, HEIGHT = 960, 300
-FRAMES = 18
+WIDTH, HEIGHT = 1200, 350
+FRAMES = 12
 
-FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-FONT_SERIF = "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"
-FONT_MONO = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+SERIF = "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"
+SANS = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+SANS_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
-TITLE = ImageFont.truetype(FONT_SERIF, 44)
-SUBTITLE = ImageFont.truetype(FONT_BOLD, 14)
-MONO = ImageFont.truetype(FONT_MONO, 12)
+TITLE = ImageFont.truetype(SERIF, 58)
+SUBTITLE = ImageFont.truetype(SANS, 17)
+TAGLINE = ImageFont.truetype(SANS, 16)
 
 def center_x(draw, text, font):
     box = draw.textbbox((0, 0), text, font=font)
@@ -19,131 +19,68 @@ def center_x(draw, text, font):
 
 frames = []
 
-for frame in range(FRAMES):
-    t = frame / FRAMES
+for i in range(FRAMES):
+    t = i / FRAMES
+    image = Image.new("RGB", (WIDTH, HEIGHT), (8, 8, 9))
 
-    image = Image.new("RGB", (WIDTH, HEIGHT), (7, 7, 8))
+    # Soft charcoal vertical gradient.
     draw = ImageDraw.Draw(image)
-
-    # Calm charcoal gradient.
     for y in range(HEIGHT):
         q = y / HEIGHT
-        draw.line(
-            (0, y, WIDTH, y),
-            fill=(8 + int(9*q), 8 + int(7*q), 9 + int(4*q)),
-        )
+        r = 8 + int(6 * q)
+        g = 8 + int(5 * q)
+        b = 9 + int(4 * q)
+        draw.line((0, y, WIDTH, y), fill=(r, g, b))
 
-    # Soft ambient gold glow. The only strong motion in the banner.
-    ambient = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    ambient_draw = ImageDraw.Draw(ambient)
+    image = image.convert("RGBA")
 
-    glow_x = int(-160 + (WIDTH + 320) * t)
-    glow_y = int(170 + 18 * math.sin(math.tau * t))
-
-    ambient_draw.ellipse(
-        (glow_x - 190, glow_y - 95, glow_x + 190, glow_y + 95),
-        fill=(229, 178, 72, 34),
-    )
-    ambient_draw.ellipse(
-        (WIDTH - glow_x - 120, 45, WIDTH - glow_x + 120, 285),
-        fill=(245, 210, 126, 14),
-    )
-    ambient = ambient.filter(ImageFilter.GaussianBlur(55))
-    image = Image.alpha_composite(image.convert("RGBA"), ambient)
+    # Gentle ambient glow; deliberately slow and restrained.
+    glow = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    gd = ImageDraw.Draw(glow)
+    cx = int(-160 + (WIDTH + 320) * t)
+    gd.ellipse((cx - 180, 120, cx + 180, 480), fill=(220, 170, 65, 18))
+    glow = glow.filter(ImageFilter.GaussianBlur(75))
+    image = Image.alpha_composite(image, glow)
 
     draw = ImageDraw.Draw(image)
 
-    # Minimal frame accents.
-    draw.rounded_rectangle(
-        (2, 2, WIDTH - 3, HEIGHT - 3),
-        radius=18,
-        outline=(181, 141, 53, 120),
-        width=1,
-    )
-    draw.line((24, 34, 60, 34), fill=(224, 182, 82, 220), width=2)
-    draw.line((24, 34, 24, 64), fill=(224, 182, 82, 220), width=2)
-    draw.line((WIDTH - 60, 34, WIDTH - 24, 34), fill=(224, 182, 82, 220), width=2)
-    draw.line((WIDTH - 24, 34, WIDTH - 24, 64), fill=(224, 182, 82, 220), width=2)
+    # Minimal gold arc.
+    bbox = (-180, 45, WIDTH + 180, 470)
+    draw.arc(bbox, start=198, end=342, fill=(194, 146, 48, 155), width=1)
 
-    # Status pill.
-    pill_left, pill_top, pill_right, pill_bottom = 344, 28, 616, 56
-    draw.rounded_rectangle(
-        (pill_left, pill_top, pill_right, pill_bottom),
-        radius=14,
-        fill=(15, 12, 8, 245),
-        outline=(196, 153, 61, 155),
-        width=1,
-    )
-    draw.ellipse((360, 38, 368, 46), fill=(247, 211, 118, 255))
-    draw.text(
-        (380, 34),
-        "BUILDING REAL-WORLD SOFTWARE",
-        font=SUBTITLE,
-        fill=(239, 215, 146, 255),
-    )
+    # Moving highlight on the arc.
+    hx = int(95 + (WIDTH - 190) * t)
+    highlight = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    hd = ImageDraw.Draw(highlight)
+    hd.ellipse((hx - 32, 165, hx + 32, 225), fill=(255, 214, 118, 55))
+    highlight = highlight.filter(ImageFilter.GaussianBlur(18))
+    image = Image.alpha_composite(image, highlight)
 
-    # Name.
+    draw = ImageDraw.Draw(image)
+
     title = "VASIHARAN B"
-    title_x = center_x(draw, title, TITLE)
-    draw.text(
-        (title_x + 1, 95),
-        title,
-        font=TITLE,
-        fill=(69, 48, 15, 165),
-    )
-    draw.text(
-        (title_x, 93),
-        title,
-        font=TITLE,
-        fill=(245, 218, 151, 255),
-    )
+    tx = center_x(draw, title, TITLE)
+    draw.text((tx, 108), title, font=TITLE, fill=(236, 207, 143, 255))
 
-    # Very subtle title sheen.
-    sheen_x = int(title_x - 120 + (TITLE.size * 3 + 120) * t)
-    sheen = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    sheen_draw = ImageDraw.Draw(sheen)
-    sheen_draw.rectangle(
-        (sheen_x, 92, sheen_x + 45, 143),
-        fill=(255, 246, 190, 32),
-    )
-    sheen = sheen.filter(ImageFilter.GaussianBlur(10))
-    image = Image.alpha_composite(image, sheen)
-    draw = ImageDraw.Draw(image)
+    subtitle = "ELECTRONICS & COMMUNICATION ENGINEERING   •   FULL-STACK   •   AI & SYSTEMS"
+    draw.text((center_x(draw, subtitle, SUBTITLE), 181), subtitle, font=SUBTITLE, fill=(209, 205, 197, 235))
 
-    subtitle = "ELECTRONICS & COMMUNICATION ENGINEERING  •  FULL-STACK  •  AI & SYSTEMS"
-    draw.text(
-        (center_x(draw, subtitle, SUBTITLE), 151),
-        subtitle,
-        font=SUBTITLE,
-        fill=(211, 207, 196, 248),
-    )
-
-    # Clean divider.
-    divider_y = 190
-    draw.line((284, divider_y, 456, divider_y), fill=(161, 123, 42, 145), width=1)
-    draw.line((504, divider_y, 676, divider_y), fill=(161, 123, 42, 145), width=1)
-    draw.rounded_rectangle(
-        (477, divider_y - 3, 483, divider_y + 3),
-        radius=2,
-        fill=(242, 211, 128, 245),
-    )
-
-    draw.text(
-        (center_x(draw, "CODE  •  SYSTEMS  •  AI  •  SHIP", MONO), 216),
-        "CODE  •  SYSTEMS  •  AI  •  SHIP",
-        font=MONO,
-        fill=(148, 142, 131, 235),
-    )
+    # Fine divider with a soft center glint.
+    y = 222
+    draw.line((355, y, 845, y), fill=(159, 118, 42, 150), width=1)
+    draw.ellipse((596, y - 2, 604, y + 6), fill=(242, 207, 119, 220))
 
     tagline = "TURNING PRACTICAL PROBLEMS INTO WORKING SOFTWARE"
-    draw.text(
-        (center_x(draw, tagline, SUBTITLE), 247),
-        tagline,
-        font=SUBTITLE,
-        fill=(219, 213, 201, 235),
-    )
+    draw.text((center_x(draw, tagline, TAGLINE), 261), tagline, font=TAGLINE, fill=(190, 185, 176, 225))
 
-    frames.append(image.convert("P", palette=Image.Palette.ADAPTIVE, colors=96))
+    # Slight vignette for a calmer cinematic finish.
+    vignette = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    vd = ImageDraw.Draw(vignette)
+    vd.rectangle((0, 0, WIDTH, HEIGHT), fill=(0, 0, 0, 22))
+    vignette = vignette.filter(ImageFilter.GaussianBlur(30))
+    image = Image.alpha_composite(image, vignette)
+
+    frames.append(image.convert("P", palette=Image.Palette.ADAPTIVE, colors=64))
 
 output = "assets/hero.gif"
 os.makedirs(os.path.dirname(output), exist_ok=True)
@@ -152,7 +89,7 @@ frames[0].save(
     output,
     save_all=True,
     append_images=frames[1:],
-    duration=120,
+    duration=170,
     loop=0,
     optimize=True,
     disposal=2,
