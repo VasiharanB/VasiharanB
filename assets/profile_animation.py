@@ -1,194 +1,158 @@
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import math
 import os
-import random
 
 WIDTH, HEIGHT = 960, 300
-FRAMES = 24
-random.seed(20260920)
+FRAMES = 18
 
 FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FONT_SERIF = "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"
 FONT_MONO = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 
-TITLE = ImageFont.truetype(FONT_BOLD, 44)
+TITLE = ImageFont.truetype(FONT_SERIF, 44)
 SUBTITLE = ImageFont.truetype(FONT_BOLD, 14)
 MONO = ImageFont.truetype(FONT_MONO, 12)
 
-particles = [
-    (random.randrange(WIDTH), random.randrange(HEIGHT),
-     random.uniform(0.5, 1.3), random.uniform(0, math.tau))
-    for _ in range(110)
-]
+def center_x(draw, text, font):
+    box = draw.textbbox((0, 0), text, font=font)
+    return (WIDTH - (box[2] - box[0])) // 2
 
 frames = []
 
 for frame in range(FRAMES):
-    image = Image.new("RGB", (WIDTH, HEIGHT), (4, 4, 5))
+    t = frame / FRAMES
 
-    # Deep cinematic gradient.
+    image = Image.new("RGB", (WIDTH, HEIGHT), (7, 7, 8))
     draw = ImageDraw.Draw(image)
+
+    # Calm charcoal gradient.
     for y in range(HEIGHT):
-        r = 4 + int(11 * y / HEIGHT)
-        g = 4 + int(8 * y / HEIGHT)
-        b = 3 + int(5 * y / HEIGHT)
-        draw.line((0, y, WIDTH, y), fill=(r, g, b))
+        q = y / HEIGHT
+        draw.line(
+            (0, y, WIDTH, y),
+            fill=(8 + int(9*q), 8 + int(7*q), 9 + int(4*q)),
+        )
 
-    # Moving golden light bloom.
-    bloom = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    bloom_draw = ImageDraw.Draw(bloom)
-    sweep_x = -160 + ((frame * 58) % (WIDTH + 360))
-    bloom_draw.ellipse(
-        (sweep_x - 140, 25, sweep_x + 140, HEIGHT - 20),
-        fill=(232, 182, 70, 42),
+    # Soft ambient gold glow. The only strong motion in the banner.
+    ambient = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    ambient_draw = ImageDraw.Draw(ambient)
+
+    glow_x = int(-160 + (WIDTH + 320) * t)
+    glow_y = int(170 + 18 * math.sin(math.tau * t))
+
+    ambient_draw.ellipse(
+        (glow_x - 190, glow_y - 95, glow_x + 190, glow_y + 95),
+        fill=(229, 178, 72, 34),
     )
-    bloom_draw.ellipse(
-        (WIDTH - sweep_x - 180, 55, WIDTH - sweep_x + 100, HEIGHT + 80),
-        fill=(255, 224, 120, 18),
+    ambient_draw.ellipse(
+        (WIDTH - glow_x - 120, 45, WIDTH - glow_x + 120, 285),
+        fill=(245, 210, 126, 14),
     )
-    bloom = bloom.filter(ImageFilter.GaussianBlur(34))
-    image = Image.alpha_composite(image.convert("RGBA"), bloom)
+    ambient = ambient.filter(ImageFilter.GaussianBlur(55))
+    image = Image.alpha_composite(image.convert("RGBA"), ambient)
 
     draw = ImageDraw.Draw(image)
 
-    # Tech grid.
-    for x in range(0, WIDTH, 36):
-        draw.line((x, 0, x, HEIGHT), fill=(220, 170, 60, 10), width=1)
-    for y in range(0, HEIGHT, 36):
-        draw.line((0, y, WIDTH, y), fill=(220, 170, 60, 8), width=1)
-
-    # Glitter field.
-    for x, y, size, phase in particles:
-        xx = (x + frame * 7) % WIDTH
-        yy = y + 2 * math.sin(frame / 3 + phase)
-        intensity = int(45 + 150 * (0.5 + 0.5 * math.sin(frame * 0.65 + phase)))
-        radius = max(1, int(size))
-        draw.ellipse(
-            (xx - radius, yy - radius, xx + radius, yy + radius),
-            fill=(248, 213, 113, intensity),
-        )
-        if intensity > 150:
-            draw.line((xx - 3, yy, xx + 3, yy), fill=(255, 242, 170, intensity), width=1)
-            draw.line((xx, yy - 3, xx, yy + 3), fill=(255, 242, 170, intensity), width=1)
-
-    # Rotating orbital HUD.
-    cx, cy = 805, 92
-    angle = frame * math.tau / 18
-    draw.ellipse(
-        (cx - 92, cy - 38, cx + 92, cy + 38),
-        outline=(226, 179, 67, 120),
-        width=1,
-    )
-    px = cx + 92 * math.cos(angle)
-    py = cy + 38 * math.sin(angle)
-    draw.ellipse((px - 5, py - 5, px + 5, py + 5), fill=(255, 236, 150, 240))
-
-    # Frame corners.
+    # Minimal frame accents.
     draw.rounded_rectangle(
         (2, 2, WIDTH - 3, HEIGHT - 3),
         radius=18,
-        outline=(220, 172, 58, 145),
+        outline=(181, 141, 53, 120),
         width=1,
     )
-    draw.line((24, 34, 60, 34), fill=(236, 193, 91, 220), width=3)
-    draw.line((24, 34, 24, 64), fill=(236, 193, 91, 220), width=3)
-    draw.line((WIDTH - 60, 34, WIDTH - 24, 34), fill=(236, 193, 91, 220), width=3)
-    draw.line((WIDTH - 24, 34, WIDTH - 24, 64), fill=(236, 193, 91, 220), width=3)
+    draw.line((24, 34, 60, 34), fill=(224, 182, 82, 220), width=2)
+    draw.line((24, 34, 24, 64), fill=(224, 182, 82, 220), width=2)
+    draw.line((WIDTH - 60, 34, WIDTH - 24, 34), fill=(224, 182, 82, 220), width=2)
+    draw.line((WIDTH - 24, 34, WIDTH - 24, 64), fill=(224, 182, 82, 220), width=2)
 
     # Status pill.
+    pill_left, pill_top, pill_right, pill_bottom = 344, 28, 616, 56
     draw.rounded_rectangle(
-        (343, 28, 617, 56),
+        (pill_left, pill_top, pill_right, pill_bottom),
         radius=14,
-        fill=(20, 14, 6),
-        outline=(215, 165, 52, 180),
+        fill=(15, 12, 8, 245),
+        outline=(196, 153, 61, 155),
         width=1,
     )
-    pulse = 4 + 2 * math.sin(frame * math.pi / 5)
-    draw.ellipse(
-        (360 - pulse, 42 - pulse, 360 + pulse, 42 + pulse),
-        fill=(246, 209, 111, 235),
-    )
+    draw.ellipse((360, 38, 368, 46), fill=(247, 211, 118, 255))
     draw.text(
-        (375, 34),
+        (380, 34),
         "BUILDING REAL-WORLD SOFTWARE",
         font=SUBTITLE,
-        fill=(242, 216, 130, 255),
+        fill=(239, 215, 146, 255),
     )
 
-    # Cinematic title with moving shimmer.
+    # Name.
     title = "VASIHARAN B"
-    bbox = draw.textbbox((0, 0), title, font=TITLE)
-    title_width = bbox[2] - bbox[0]
-    title_x = (WIDTH - title_width) // 2
-    title_y = 92
-
+    title_x = center_x(draw, title, TITLE)
     draw.text(
-        (title_x + 2, title_y + 2),
+        (title_x + 1, 95),
         title,
         font=TITLE,
-        fill=(75, 45, 9, 170),
+        fill=(69, 48, 15, 165),
     )
     draw.text(
-        (title_x, title_y),
+        (title_x, 93),
         title,
         font=TITLE,
-        fill=(245, 216, 137, 255),
+        fill=(245, 218, 151, 255),
     )
 
-    shimmer_x = title_x - 60 + ((frame * 38) % (title_width + 160))
-    shine = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    shine_draw = ImageDraw.Draw(shine)
-    shine_draw.rectangle(
-        (shimmer_x, title_y - 4, shimmer_x + 70, title_y + 52),
-        fill=(255, 246, 186, 120),
+    # Very subtle title sheen.
+    sheen_x = int(title_x - 120 + (TITLE.size * 3 + 120) * t)
+    sheen = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    sheen_draw = ImageDraw.Draw(sheen)
+    sheen_draw.rectangle(
+        (sheen_x, 92, sheen_x + 45, 143),
+        fill=(255, 246, 190, 32),
     )
-    shine = shine.filter(ImageFilter.GaussianBlur(8))
-    image = Image.alpha_composite(image, shine)
+    sheen = sheen.filter(ImageFilter.GaussianBlur(10))
+    image = Image.alpha_composite(image, sheen)
     draw = ImageDraw.Draw(image)
-    draw.text(
-        (title_x, title_y),
-        title,
-        font=TITLE,
-        fill=(255, 233, 165, 220),
-    )
 
     subtitle = "ELECTRONICS & COMMUNICATION ENGINEERING  •  FULL-STACK  •  AI & SYSTEMS"
-    sb = draw.textbbox((0, 0), subtitle, font=SUBTITLE)
     draw.text(
-        ((WIDTH - (sb[2] - sb[0])) / 2, 148),
+        (center_x(draw, subtitle, SUBTITLE), 151),
         subtitle,
         font=SUBTITLE,
-        fill=(221, 214, 199, 255),
+        fill=(211, 207, 196, 248),
     )
 
-    draw.line((258, 188, 458, 188), fill=(224, 173, 59, 210), width=1)
-    draw.line((502, 188, 702, 188), fill=(224, 173, 59, 210), width=1)
-    draw.polygon(
-        [(480, 182), (486, 188), (480, 194), (474, 188)],
-        fill=(255, 235, 150, 255),
+    # Clean divider.
+    divider_y = 190
+    draw.line((284, divider_y, 456, divider_y), fill=(161, 123, 42, 145), width=1)
+    draw.line((504, divider_y, 676, divider_y), fill=(161, 123, 42, 145), width=1)
+    draw.rounded_rectangle(
+        (477, divider_y - 3, 483, divider_y + 3),
+        radius=2,
+        fill=(242, 211, 128, 245),
     )
 
     draw.text(
-        (340, 216),
+        (center_x(draw, "CODE  •  SYSTEMS  •  AI  •  SHIP", MONO), 216),
         "CODE  •  SYSTEMS  •  AI  •  SHIP",
         font=MONO,
-        fill=(160, 150, 135, 255),
-    )
-    draw.text(
-        (274, 246),
-        "TURNING PRACTICAL PROBLEMS INTO WORKING SOFTWARE",
-        font=SUBTITLE,
-        fill=(226, 218, 202, 235),
+        fill=(148, 142, 131, 235),
     )
 
-    frames.append(image.convert("P"))
+    tagline = "TURNING PRACTICAL PROBLEMS INTO WORKING SOFTWARE"
+    draw.text(
+        (center_x(draw, tagline, SUBTITLE), 247),
+        tagline,
+        font=SUBTITLE,
+        fill=(219, 213, 201, 235),
+    )
+
+    frames.append(image.convert("P", palette=Image.Palette.ADAPTIVE, colors=96))
 
 output = "assets/hero.gif"
 os.makedirs(os.path.dirname(output), exist_ok=True)
+
 frames[0].save(
     output,
     save_all=True,
     append_images=frames[1:],
-    duration=95,
+    duration=120,
     loop=0,
     optimize=True,
     disposal=2,
