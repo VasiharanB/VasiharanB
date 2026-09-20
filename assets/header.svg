@@ -1,32 +1,105 @@
-<svg width="1200" height="320" viewBox="0 0 1200 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="100%" height="340">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="320" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#050505"/>
-      <stop offset="0.55" stop-color="#11100D"/>
-      <stop offset="1" stop-color="#18140C"/>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050505"/>
+      <stop offset="55%" stop-color="#0B0A08"/>
+      <stop offset="100%" stop-color="#151008"/>
     </linearGradient>
-    <linearGradient id="gold" x1="80" y1="40" x2="1040" y2="270" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F8D47A"/>
-      <stop offset="0.5" stop-color="#D89B2B"/>
-      <stop offset="1" stop-color="#8D5B0B"/>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7A4B05"/>
+      <stop offset="30%" stop-color="#E6B64B"/>
+      <stop offset="50%" stop-color="#FFF0A6"/>
+      <stop offset="70%" stop-color="#E6B64B"/>
+      <stop offset="100%" stop-color="#7A4B05"/>
+      <animate attributeName="x1" from="-100%" to="100%" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="x2" from="0%" to="200%" dur="8s" repeatCount="indefinite"/>
     </linearGradient>
+    <radialGradient id="orb" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF3B0" stop-opacity="0.95"/>
+      <stop offset="35%" stop-color="#E1AE32" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#E1AE32" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#E4B74B" stroke-width="0.7" stroke-opacity="0.08"/>
+    </pattern>
     <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="28"/>
     </filter>
   </defs>
-  <rect width="1200" height="320" rx="24" fill="url(#bg)"/>
-  <path d="M0 250C170 210 210 300 390 238C570 176 680 82 1200 118" stroke="url(#gold)" stroke-width="2" opacity="0.45"/>
-  <path d="M0 284C160 245 250 315 410 266C610 204 770 126 1200 150" stroke="#F0C45A" stroke-width="1" opacity="0.18"/>
-  <circle cx="1005" cy="70" r="110" stroke="#D9A441" stroke-width="1" opacity="0.12"/>
-  <circle cx="1005" cy="70" r="75" stroke="#D9A441" stroke-width="1" opacity="0.15"/>
-  <circle cx="1005" cy="70" r="8" fill="#F4CB69" filter="url(#glow)"/>
-  <circle cx="185" cy="75" r="3" fill="#F3CF72"/>
-  <circle cx="230" cy="104" r="2" fill="#B8862A"/>
-  <circle cx="1080" cy="212" r="2" fill="#E6B84A"/>
-  <text x="70" y="110" fill="#F6F1E3" font-family="Inter, Arial, sans-serif" font-size="23" letter-spacing="5">VASIHARAN B</text>
-  <text x="70" y="171" fill="url(#gold)" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="700">FULL-STACK DEVELOPER</text>
-  <text x="73" y="210" fill="#D9D3C5" font-family="Inter, Arial, sans-serif" font-size="19">Building practical software, intelligent systems, and immersive products.</text>
-  <rect x="70" y="246" width="205" height="2" rx="1" fill="url(#gold)"/>
-  <text x="70" y="278" fill="#918A7A" font-family="JetBrains Mono, Consolas, monospace" font-size="14">code • systems • AI • ship</text>
+
+  <rect x="0" y="0" width="1200" height="340" rx="22" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="340" rx="22" fill="url(#grid)"/>
+
+  <circle cx="1020" cy="85" r="135" fill="url(#orb)" opacity="0.32"/>
+  <circle cx="150" cy="275" r="120" fill="#D99A1E" opacity="0.08" filter="url(#soft)"/>
+
+  <!-- animated scan line -->
+  <rect x="-160" y="0" width="160" height="340" fill="#F4CF6A" opacity="0.035">
+    <animate attributeName="x" from="-160" to="1200" dur="6s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- animated orbit -->
+  <g transform="translate(1000 102)" opacity="0.72">
+    <ellipse rx="92" ry="38" fill="none" stroke="#E6B64B" stroke-width="1.2">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="10s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse rx="92" ry="38" fill="none" stroke="#C9901F" stroke-width="0.8" opacity="0.7">
+      <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="14s" repeatCount="indefinite"/>
+    </ellipse>
+    <circle cx="0" cy="0" r="7" fill="#FFF0A6" filter="url(#glow)">
+      <animate attributeName="r" values="6;9;6" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- frame accents -->
+  <rect x="2" y="2" width="1196" height="336" rx="20" fill="none" stroke="url(#gold)" stroke-width="1.2" stroke-opacity="0.55"/>
+  <path d="M22 52V22H52" stroke="#E4B74B" stroke-width="3"/>
+  <path d="M1178 52V22H1148" stroke="#E4B74B" stroke-width="3"/>
+  <path d="M22 288V318H52" stroke="#E4B74B" stroke-width="3"/>
+  <path d="M1178 288V318H1148" stroke="#E4B74B" stroke-width="3"/>
+
+  <!-- live badge -->
+  <g transform="translate(455 34)">
+    <rect width="290" height="30" rx="15" fill="#100C06" stroke="#DDA93D" stroke-width="1"/>
+    <circle cx="20" cy="15" r="5" fill="#E4B74B">
+      <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="157" y="20" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1.8" fill="#F3D779">BUILDING REAL-WORLD SOFTWARE</text>
+  </g>
+
+  <text x="600" y="138" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="56" font-weight="900" letter-spacing="6" fill="url(#gold)" filter="url(#glow)">
+    VASIHARAN B
+  </text>
+  <text x="600" y="138" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="56" font-weight="900" letter-spacing="6" fill="#FFF8D9" fill-opacity="0.90">
+    VASIHARAN B
+  </text>
+
+  <text x="600" y="176" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="3.2" fill="#D8D1C2">
+    <tspan fill="#E8B94E">ELECTRONICS &amp; COMMUNICATION ENGINEERING</tspan>
+    <tspan fill="#827A6B"> • </tspan>
+    <tspan fill="#F5F1E6">FULL-STACK</tspan>
+    <tspan fill="#827A6B"> • </tspan>
+    <tspan fill="#E8B94E">AI &amp; SYSTEMS</tspan>
+  </text>
+
+  <g transform="translate(0 206)">
+    <line x1="270" y1="0" x2="560" y2="0" stroke="url(#gold)" stroke-width="1.5" opacity="0.85"/>
+    <polygon points="600,-6 606,0 600,6 594,0" fill="#F2CF6F" filter="url(#glow)">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="6s" repeatCount="indefinite"/>
+    </polygon>
+    <line x1="640" y1="0" x2="930" y2="0" stroke="url(#gold)" stroke-width="1.5" opacity="0.85"/>
+  </g>
+
+  <text x="600" y="245" text-anchor="middle" font-family="JetBrains Mono,Consolas,monospace" font-size="15" font-weight="600" letter-spacing="2.2" fill="#9D9585">
+    &lt;/&gt; CODE • SYSTEMS • AI • SHIP
+  </text>
+
+  <text x="600" y="286" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" letter-spacing="2" fill="#D2CABA">
+    TURNING PRACTICAL PROBLEMS INTO WORKING SOFTWARE
+  </text>
 </svg>
