@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/header.svg" width="100%" alt="Vasiharan B animated developer header" />
+  <a href="assets/header.svg"><img src="assets/hero.gif" width="100%" alt="Vasiharan B cinematic animated developer header" /></a>
 </p>
 
 <p align="center">
