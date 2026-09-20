@@ -27,6 +27,7 @@ jobs:
       - name: Install Pillow
         run: python -m pip install --upgrade pillow
 
+      # Keep the banner intentionally minimal, smooth, and calm.
       - name: Generate animated GIF
         run: python assets/profile_animation.py
 
