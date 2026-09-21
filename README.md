@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="assets/header.svg"><img src="assets/hero.gif" width="100%" alt="Vasiharan B cinematic animated developer header" /></a>
+  <img src="assets/header.svg" width="100%" alt="Vasiharan B professional developer header" />
 </p>
 
 <p align="center">
@@ -29,7 +29,7 @@
 <h2 align="center">✦ ABOUT THE BUILDER ✦</h2>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2600&pause=800&color=D9A63A&center=true&vCenter=true&width=800&height=42&lines=Building+real-world+software.;Designing+systems+that+solve+problems.;Learning%2C+shipping%2C+and+iterating.;Turning+ideas+into+working+products." alt="Animated introduction" />
+  <b>BUILDING REAL-WORLD SOFTWARE • DESIGNING SYSTEMS • SHIPPING PRODUCTS</b>
 </p>
 
 <p align="center">
@@ -134,7 +134,7 @@ Placement preparation and assessment platform with student/admin workflows, anal
 <h2 align="center">✦ CONTRIBUTION JOURNEY ✦</h2>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Platane/snk/output/github-contribution-grid-snake-dark.svg" width="100%" alt="Contribution snake animation" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=VasiharanB&bg_color=0B0907&color=D89B2B&line=D89B2B&point=F0C35A&area=true&hide_border=true" width="100%" alt="GitHub contribution activity" />
 </p>
 
 ---
@@ -160,5 +160,5 @@ Placement preparation and assessment platform with student/admin workflows, anal
 </p>
 
 <p align="center">
-  <img src="assets/footer.svg" width="100%" alt="Animated profile footer" />
+  <img src="assets/footer.svg" width="100%" alt="Profile footer" />
 </p>
