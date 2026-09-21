@@ -3,16 +3,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/VasiharanB">
-    <img src="https://img.shields.io/badge/GitHub-0B0D10?style=flat-square&logo=github&logoColor=E6BD68" alt="GitHub" />
-  </a>
-  <a href="https://www.linkedin.com/in/vasiharan-b-ba0772322/">
-    <img src="https://img.shields.io/badge/LinkedIn-0B0D10?style=flat-square&logo=linkedin&logoColor=E6BD68" alt="LinkedIn" />
-  </a>
-  <a href="mailto:vasiharan030@gmail.com">
-    <img src="https://img.shields.io/badge/Email-0B0D10?style=flat-square&logo=gmail&logoColor=E6BD68" alt="Email" />
-  </a>
-  <img src="https://komarev.com/ghpvc/?username=VasiharanB&style=flat-square&color=5a5140&label=views" alt="Profile views" />
+  <a href="https://github.com/VasiharanB">GitHub</a>
+  &nbsp;·&nbsp;
+  <a href="https://www.linkedin.com/in/vasiharan-b-ba0772322/">LinkedIn</a>
+  &nbsp;·&nbsp;
+  <a href="mailto:vasiharan030@gmail.com">Email</a>
 </p>
 
 ---
@@ -47,26 +42,21 @@ I build practical software across **web applications, business systems, AI-assis
 
 ## Technical Stack
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=python,java,js,ts,php,html,css,c,cpp&theme=dark" alt="Programming languages" />
-</p>
+**Languages:** Python · Java · JavaScript · TypeScript · PHP · HTML · CSS · C · C++  
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=react,vite,bootstrap,tailwind,nodejs,express,django&theme=dark" alt="Frameworks" />
-</p>
+**Frameworks:** React · Vite · Bootstrap · Tailwind · Node.js · Express · Django  
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=mysql,postgresql,git,github,figma,postman,linux,vscode&theme=dark" alt="Databases and tools" />
-</p>
+**Data & Tools:** MySQL · PostgreSQL · Git · GitHub · Figma · Postman · Linux · VS Code
 
 ---
 
 ## GitHub
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=VasiharanB&show_icons=true&hide_border=true&rank_icon=github&bg_color=0B0D10&title_color=E6BD68&text_color=D7D2C8&icon_color=E6BD68" width="52%" alt="GitHub statistics" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=VasiharanB&layout=compact&hide_border=true&bg_color=0B0D10&title_color=E6BD68&text_color=D7D2C8&langs_count=8" width="36%" alt="Top languages" />
-</p>
+I keep this section intentionally lightweight and dependable.
+
+**Profile:** [github.com/VasiharanB](https://github.com/VasiharanB)  
+**Repositories:** [Browse projects](https://github.com/VasiharanB?tab=repositories)  
+**Activity:** [View contributions](https://github.com/VasiharanB?tab=overview)
 
 ---
 
