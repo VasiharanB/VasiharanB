@@ -1,69 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="100%" height="340" role="img" aria-label="Vasiharan B professional developer profile header">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="100%" height="320" role="img" aria-label="Vasiharan B — Full-Stack Developer, AI and Systems">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#050505"/>
-      <stop offset="55%" stop-color="#0b0b0b"/>
-      <stop offset="100%" stop-color="#15110a"/>
+      <stop offset="0%" stop-color="#07090b"/>
+      <stop offset="62%" stop-color="#0b0d10"/>
+      <stop offset="100%" stop-color="#13100b"/>
     </linearGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#8c5d13"/>
-      <stop offset="50%" stop-color="#f0c96b"/>
-      <stop offset="100%" stop-color="#8c5d13"/>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8f681f"/>
+      <stop offset="50%" stop-color="#e6bd68"/>
+      <stop offset="100%" stop-color="#8f681f"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="60%">
-      <stop offset="0%" stop-color="#d9a63a" stop-opacity="0.15"/>
-      <stop offset="70%" stop-color="#d9a63a" stop-opacity="0.035"/>
-      <stop offset="100%" stop-color="#d9a63a" stop-opacity="0"/>
+    <radialGradient id="wash" cx="50%" cy="42%" r="65%">
+      <stop offset="0%" stop-color="#e0b85c" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#e0b85c" stop-opacity="0"/>
     </radialGradient>
-    <filter id="blur"><feGaussianBlur stdDeviation="24"/></filter>
   </defs>
 
-  <rect width="1200" height="340" rx="24" fill="url(#bg)"/>
-  <ellipse cx="600" cy="150" rx="430" ry="155" fill="url(#glow)" filter="url(#blur)"/>
+  <rect width="1200" height="320" rx="18" fill="url(#bg)"/>
+  <ellipse cx="600" cy="138" rx="420" ry="130" fill="url(#wash)"/>
 
-  <path d="M72 274 H1128" stroke="#c89a43" stroke-opacity="0.18"/>
-  <path d="M160 88 C320 18, 480 18, 600 88 C720 158, 880 158, 1040 88"
-        fill="none" stroke="#e0b65a" stroke-opacity="0.14"/>
-  <path d="M220 106 C350 50, 470 52, 600 106 C730 160, 850 160, 980 106"
-        fill="none" stroke="#e0b65a" stroke-opacity="0.08"/>
+  <path d="M170 250 C350 190 470 190 600 228 C730 266 850 266 1030 206"
+        fill="none" stroke="#d8af5b" stroke-opacity=".09" stroke-width="1"/>
+  <path d="M210 260 H990" stroke="#d8af5b" stroke-opacity=".13" stroke-width="1"/>
+  <path d="M55 54 V28 H82" fill="none" stroke="#dcb45e" stroke-opacity=".55" stroke-width="2"/>
+  <path d="M1145 54 V28 H1118" fill="none" stroke="#dcb45e" stroke-opacity=".55" stroke-width="2"/>
 
-  <path d="M58 52 V24 H86" fill="none" stroke="#e2b454" stroke-width="2"/>
-  <path d="M1142 52 V24 H1114" fill="none" stroke="#e2b454" stroke-width="2"/>
-  <path d="M58 288 V316 H86" fill="none" stroke="#e2b454" stroke-width="2"/>
-  <path d="M1142 288 V316 H1114" fill="none" stroke="#e2b454" stroke-width="2"/>
-
-  <text x="600" y="120"
+  <text x="600" y="126"
         text-anchor="middle"
         font-family="Georgia, 'Times New Roman', serif"
-        font-size="58"
+        font-size="60"
         font-weight="700"
         letter-spacing="5"
-        fill="url(#gold)">VASIHARAN B</text>
+        fill="url(#accent)">VASIHARAN B</text>
 
-  <text x="600" y="162"
-        text-anchor="middle"
-        font-family="Arial, Helvetica, sans-serif"
-        font-size="15"
-        font-weight="600"
-        letter-spacing="3"
-        fill="#ded8cb">ELECTRONICS &amp; COMMUNICATION ENGINEERING</text>
-
-  <line x1="420" y1="194" x2="780" y2="194" stroke="url(#gold)" stroke-width="1.2"/>
-  <circle cx="600" cy="194" r="4" fill="#f0c96b"/>
-
-  <text x="600" y="227"
-        text-anchor="middle"
-        font-family="Arial, Helvetica, sans-serif"
-        font-size="15"
-        font-weight="600"
-        letter-spacing="2.6"
-        fill="#c9c2b5">FULL-STACK  •  AI &amp; SYSTEMS  •  REAL-WORLD SOFTWARE</text>
-
-  <text x="600" y="272"
+  <text x="600" y="164"
         text-anchor="middle"
         font-family="Arial, Helvetica, sans-serif"
         font-size="14"
+        font-weight="600"
+        letter-spacing="2.8"
+        fill="#d8d5cf">ELECTRONICS &amp; COMMUNICATION ENGINEERING</text>
+
+  <rect x="485" y="190" width="230" height="1" fill="#d9b35e" opacity=".55"/>
+
+  <text x="600" y="222"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="14"
+        font-weight="600"
+        letter-spacing="2.2"
+        fill="#c9c5bc">FULL-STACK  •  AI &amp; SYSTEMS  •  PRODUCT ENGINEERING</text>
+
+  <text x="600" y="252"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="12"
         font-weight="500"
         letter-spacing="2"
-        fill="#8f887c">BUILD • SOLVE • SHIP • IMPROVE</text>
+        fill="#89857e">BUILDING PRACTICAL SOFTWARE THAT SOLVES REAL PROBLEMS</text>
 </svg>
